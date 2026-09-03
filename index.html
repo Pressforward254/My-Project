@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Missions of Hope International — Results &amp; Analytics</title>
+<meta name="robots" content="noindex, nofollow">
+<!-- noindex: this holds real student records — it should be reachable by direct
+     link only, never indexed or suggested by search engines. See DEPLOYMENT.md. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-navy:#1F2139;
+    --ink-navy-2:#203656;
+    --paper:#F5F6F4;
+    --paper-raised:#FFFFFF;
+    --brand-blue:#5185D5;
+    --brand-blue-soft:#DCE6F7;
+    --brand-blue-deep:#3E6BB8;
+    --brand-plum:#2C1B35;
+    --success:#3F7A5D;
+    --error:#B24444;
+    --text:#1A2233;
+    --text-soft:#5B6478;
+    --line:#DADFE2;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--text);
+    min-height:100vh;
+  }
+  .letterhead{
+    background:var(--ink-navy);
+    color:#fff;
+    padding:16px 28px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .seal{
+    width:44px;height:44px;border-radius:10px;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    border:2px solid var(--brand-blue-soft);
+    overflow:hidden;
+    padding:4px;
+  }
+  .seal img{ width:100%; height:100%; object-fit:contain; }
+  .letterhead h1{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:1.05rem;
+    margin:0;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  .letterhead h1 .accent{ color:var(--brand-blue); }
+  .letterhead p{
+    margin:1px 0 0;
+    font-size:0.72rem;
+    color:#9AA6BF;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .stage{
+    max-width:1100px;
+    margin:0 auto;
+    padding:40px 20px 80px;
+  }
+
+  /* ---------- LOGIN (split hero) ---------- */
+  .login-hero{
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    align-items:stretch;
+    min-height:560px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(10,15,30,0.45);
+    background:linear-gradient(160deg, var(--ink-navy) 0%, var(--ink-navy-2) 55%, var(--brand-blue-deep) 100%);
+  }
+  .login-illustration{
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    padding:48px; position:relative; overflow:hidden;
+  }
+  .login-illustration .blob{
+    position:absolute; border-radius:50%; opacity:0.16; background:var(--brand-blue);
+  }
+  .login-illustration .blob.b1{ width:340px; height:340px; top:-80px; left:-100px; }
+  .login-illustration .blob.b2{ width:260px; height:260px; bottom:-90px; right:-60px; background:#6FCF97; opacity:0.14; }
+  .login-illustration svg{ width:min(320px, 70%); height:auto; position:relative; z-index:1; }
+  .login-illustration .tagline{
+    position:relative; z-index:1;
+    color:#fff; text-align:center; margin-top:26px; max-width:360px;
+  }
+  .login-illustration .tagline h2{
+    font-family:'Fraunces',serif; font-size:1.35rem; margin:0 0 8px; font-weight:600;
+  }
+  .login-illustration .tagline p{
+    font-size:0.9rem; color:#C7CEDC; margin:0; line-height:1.5;
+  }
+  .login-panel{
+    background:var(--paper);
+    display:flex; flex-direction:column; justify-content:center;
+    padding:48px 56px;
+  }
+  .login-panel .eyebrow{
+    font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--brand-blue-deep); margin:0 0 6px;
+  }
+  .login-panel > h2.headline{
+    font-family:'Fraunces',serif; font-size:1.7rem; margin:0 0 22px;
+  }
+  .folder{
+    width:100%;
+    max-width:420px;
+  }
+  .tabs{
+    display:flex;
+    gap:4px;
+  }
+  .tab{
+    flex:1;
+    padding:12px 6px;
+    text-align:center;
+    font-size:0.78rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    color:var(--text-soft);
+    background:#E7E9E4;
+    border:none;
+    border-radius:8px 8px 0 0;
+    cursor:pointer;
+    position:relative;
+    top:1px;
+  }
+  .tab.active{
+    background:var(--paper-raised);
+    color:var(--ink-navy);
+    box-shadow:0 -2px 0 var(--brand-blue) inset;
+  }
+  .card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:0 8px 8px 8px;
+    padding:28px;
+    box-shadow:0 18px 40px -20px rgba(10,15,30,0.35);
+  }
+  .card h2{
+    font-family:'Fraunces',serif;
+    font-size:1.15rem;
+    margin:0 0 6px;
+  }
+  .card .sub{
+    font-size:0.85rem;
+    color:var(--text-soft);
+    margin:0 0 20px;
+  }
+  @media (max-width: 880px){
+    .login-hero{ grid-template-columns:1fr; min-height:auto; }
+    .login-illustration{ padding:36px 24px; }
+    .login-panel{ padding:36px 24px; }
+  }
+  .pw-wrap{ position:relative; }
+  .pw-wrap input{ padding-right:64px; }
+  .pw-toggle{
+    position:absolute; right:8px; top:8px;
+    background:none; border:none; cursor:pointer;
+    font-size:0.7rem; font-weight:700; letter-spacing:0.03em;
+    color:var(--brand-blue-deep); text-transform:uppercase;
+    padding:6px 8px;
+  }
+  label{
+    display:block;
+    font-size:0.75rem;
+    font-weight:600;
+    color:var(--text-soft);
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    margin-bottom:6px;
+  }
+  input[type=text], input[type=password], select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    font-size:0.95rem;
+    font-family:'Inter',sans-serif;
+    margin-bottom:16px;
+    background:#FCFCFB;
+  }
+  input:focus, select:focus, button:focus{
+    outline:2px solid var(--brand-blue);
+    outline-offset:1px;
+  }
+  .btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:var(--ink-navy);
+    color:#fff;
+    font-weight:600;
+    font-size:0.9rem;
+    cursor:pointer;
+    letter-spacing:0.02em;
+  }
+  .btn:hover{background:var(--ink-navy-2);}
+  .btn.gold{background:var(--brand-blue-deep);color:#fff;}
+  .btn.gold:hover{background:#a57630;}
+  .btn.ghost{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--text);
+  }
+  .hint{
+    font-size:0.75rem;
+    color:var(--text-soft);
+    margin-top:-8px;
+    margin-bottom:16px;
+  }
+  .error-msg{
+    background:#FBEAEA;
+    color:var(--error);
+    border:1px solid #F0C6C6;
+    border-radius:6px;
+    padding:9px 12px;
+    font-size:0.82rem;
+    margin-bottom:16px;
+  }
+
+  /* ---------- APP SHELL ---------- */
+  .app-shell{display:none;}
+  .app-shell.visible{display:flex; min-height:calc(100vh - 88px);}
+  .sidebar{
+    width:220px;
+    background:var(--ink-navy);
+    padding:20px 14px;
+    flex-shrink:0;
+  }
+  .sidebar-brand{
+    display:flex; align-items:center; gap:10px;
+    padding:2px 8px 18px; margin-bottom:10px;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .sidebar-brand img{ width:34px; height:34px; object-fit:contain; background:#fff; border-radius:6px; padding:2px; flex-shrink:0; }
+  .sidebar-brand .name{ color:#fff; font-size:0.78rem; font-weight:700; line-height:1.25; }
+  .header-logo{
+    width:40px; height:40px; object-fit:contain; background:#fff;
+    border:1px solid var(--line); border-radius:8px; padding:3px; flex-shrink:0;
+  }
+  .sidebar button.nav-item{
+    display:flex;align-items:center;gap:10px;
+    width:100%;
+    text-align:left;
+    padding:10px 12px;
+    margin-bottom:4px;
+    background:transparent;
+    border:none;
+    color:#C7CEDC;
+    border-radius:6px;
+    font-size:0.88rem;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .sidebar button.nav-item .n{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--brand-blue-soft);
+    width:16px;
+  }
+  .sidebar button.nav-item:hover{background:var(--ink-navy-2);color:#fff;}
+  .sidebar button.nav-item.active{background:var(--brand-blue-deep);color:#fff;font-weight:600;}
+  .sidebar button.nav-item.active .n{color:#DCE6F7;}
+  .sidebar .logout{
+    margin-top:24px;
+    color:#E7B8B8;
+  }
+  .admin-body{display:flex; flex:1; min-height:0;}
+  /* IT support: sidebar goes horizontal (top bar) and the center-switch
+     sits inline with the other nav items instead of a separate strip. */
+  .admin-body.it-mode{flex-direction:column;}
+  .sidebar.horizontal{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    padding:10px 16px;
+    gap:6px;
+    overflow-x:auto;
+    flex-shrink:0;
+  }
+  .sidebar.horizontal .sidebar-brand{
+    border-bottom:none; border-right:1px solid rgba(255,255,255,0.12);
+    padding:0 16px 0 0; margin:0 6px 0 0; flex-shrink:0;
+  }
+  .sidebar.horizontal button.nav-item{
+    width:auto; margin-bottom:0; white-space:nowrap;
+  }
+  .sidebar.horizontal .nav-item.logout{
+    margin-top:0; margin-left:auto; flex-shrink:0;
+  }
+  .it-center-switch{
+    display:flex; align-items:center; gap:8px;
+    color:#C7CEDC; font-size:0.78rem; white-space:nowrap;
+    padding:0 10px; border-left:1px solid rgba(255,255,255,0.12);
+  }
+  .sidebar.horizontal .it-center-switch{ margin:0 6px; }
+  .it-center-switch select{ margin:0; padding:5px 8px; font-size:0.78rem; width:auto; }
+  .it-center-switch .it-current strong{ color:#fff; }
+  .main{
+    flex:1;
+    padding:32px 36px;
+  }
+  .main h2{
+    font-family:'Fraunces',serif;
+    font-size:1.4rem;
+    margin:0 0 4px;
+  }
+  .main .lede{
+    color:var(--text-soft);
+    font-size:0.9rem;
+    margin:0 0 26px;
+  }
+  .panel{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    margin-bottom:22px;
+  }
+  .panel h3{
+    font-family:'Fraunces',serif;
+    font-size:1.02rem;
+    margin:0 0 14px;
+  }
+  .row-form{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    margin-bottom:18px;
+  }
+  .row-form .field{flex:1; min-width:140px;}
+  .row-form label{margin-bottom:6px;}
+  .row-form input, .row-form select{margin-bottom:0;}
+  .row-form .btn{width:auto; padding:11px 18px; flex-shrink:0;}
+
+  table{width:100%; border-collapse:collapse; font-size:0.88rem;}
+  th{
+    text-align:left;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    color:var(--text-soft);
+    padding:8px 10px;
+    border-bottom:2px solid var(--line);
+  }
+  td{padding:10px 10px; border-bottom:1px solid var(--line);}
+  tr:last-child td{border-bottom:none;}
+  .idx{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--text-soft);
+    font-size:0.78rem;
+    width:28px;
+  }
+  .tag{
+    display:inline-block;
+    font-size:0.72rem;
+    background:var(--brand-blue-soft);
+    color:#2c5296;
+    padding:2px 8px;
+    border-radius:20px;
+    font-weight:600;
+  }
+  .empty{
+    text-align:center;
+    color:var(--text-soft);
+    padding:24px 10px;
+    font-size:0.88rem;
+  }
+  .del{
+    background:none;border:none;color:var(--error);cursor:pointer;font-size:0.8rem;
+    font-weight:600;
+  }
+  .badge-row{display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;}
+  .stat{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 20px;
+    flex:1;
+    min-width:130px;
+  }
+  .stat .num{
+    font-family:'Fraunces',serif;
+    font-size:1.8rem;
+    color:var(--ink-navy);
+    display:block;
+  }
+  .stat .lbl{
+    font-size:0.75rem;
+    text-transform:uppercase;
+    color:var(--text-soft);
+    letter-spacing:0.03em;
+  }
+  .placeholder-box{
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+    padding:40px 24px;
+    text-align:center;
+    color:var(--text-soft);
+    background:var(--paper-raised);
+  }
+  .placeholder-box .tagline{
+    font-family:'Fraunces',serif;
+    color:var(--ink-navy);
+    font-size:1.1rem;
+    margin-bottom:6px;
+  }
+  .modal-back{
+    position:fixed;inset:0;background:rgba(28,43,74,0.55);
+    display:none;align-items:center;justify-content:center;z-index:50;
+  }
+  .modal-back.visible{display:flex;}
+  .modal{
+    background:#fff;border-radius:10px;padding:26px;width:100%;max-width:380px;
+  }
+  .modal h3{font-family:'Fraunces',serif;margin:0 0 6px;}
+  .modal p{color:var(--text-soft); font-size:0.85rem; margin:0 0 18px;}
+  .top-welcome{
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;
+  }
+  .top-welcome .who{font-size:0.85rem; color:var(--text-soft);}
+  select#teacherSelectName{margin-bottom:16px;}
+  @media (max-width: 720px){
+    .app-shell.visible{flex-direction:column;}
+    .admin-body{flex-direction:column;}
+    .sidebar{width:100%; display:flex; overflow-x:auto; gap:4px;}
+    .sidebar .logout{margin-top:0;}
+    .main{padding:22px 18px;}
+  }
+
+  /* ---------- EXAMS / PUBLISH STATUS ---------- */
+  .status-pill{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:0.72rem; font-weight:600; letter-spacing:0.02em;
+    padding:3px 10px; border-radius:20px;
+  }
+  .status-pill.published{ background:#E3EFE8; color:var(--success); }
+  .status-pill.draft{ background:#EFEAE0; color:#8A7A55; }
+  .btn.small{ width:auto; padding:7px 14px; font-size:0.78rem; }
+
+  /* ---------- MARK ENTRY GRID ---------- */
+  .select-row{
+    display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; margin-bottom:20px;
+  }
+  .select-row .field{ min-width:200px; }
+  .select-row select{ margin-bottom:0; }
+  .mark-grid-wrap{ overflow-x:auto; }
+  table.mark-grid select{
+    margin:0; padding:7px 8px; font-size:0.85rem; min-width:112px;
+  }
+  .pct-input{
+    width:64px; margin:0; padding:7px 8px; font-size:0.85rem;
+    border:1px solid var(--line); border-radius:6px; text-align:center;
+  }
+  table.mark-grid td.pts{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--text-soft);
+    font-size:0.82rem;
+  }
+  .save-flag{
+    font-size:0.72rem; color:var(--success); font-weight:600;
+    opacity:0; transition:opacity .25s ease; margin-left:8px;
+  }
+  .save-flag.show{ opacity:1; }
+  .level-chip{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.76rem;
+    font-weight:600; padding:2px 8px; border-radius:5px;
+  }
+  .level-chip.EE{ background:#E3EFE8; color:var(--success); }
+  .level-chip.ME{ background:#E8EEF7; color:#33507C; }
+  .level-chip.AE{ background:#FBF1E0; color:#8A6A22; }
+  .level-chip.BE{ background:#FBEAEA; color:var(--error); }
+  .rank{
+    font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--brand-blue);
+    font-weight:600;
+  }
+  .subtabs{ display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
+  .subtab{
+    padding:7px 14px; border-radius:20px; border:1px solid var(--line);
+    background:var(--paper-raised); color:var(--text-soft);
+    font-size:0.8rem; font-weight:600; cursor:pointer;
+  }
+  .subtab.active{ background:var(--ink-navy); color:#fff; border-color:var(--ink-navy); }
+
+  /* ---------- REPORT CARD ---------- */
+  .report-card{
+    position:relative; overflow:hidden;
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:10px;
+    padding:34px; margin-top:4px;
+  }
+  .rc-content{ position:relative; z-index:1; }
+  .rc-watermark{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-24deg);
+    font-family:'Fraunces',serif; font-weight:700; font-size:9rem; letter-spacing:0.05em;
+    color:var(--ink-navy); opacity:0.05; white-space:nowrap; pointer-events:none; z-index:0;
+  }
+  .rc-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    border-bottom:2px solid var(--ink-navy); padding-bottom:16px; margin-bottom:20px;
+  }
+  .rc-head h2{ margin:0 0 4px; }
+  .rc-head .rc-org{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand-blue); font-weight:700; }
+  .rc-head .rc-meta{ text-align:right; font-size:0.82rem; color:var(--text-soft); line-height:1.6; }
+  .rc-stats{ display:flex; gap:28px; margin:18px 0 24px; flex-wrap:wrap; }
+  .rc-stats .stat{ min-width:110px; }
+  .rc-footnote{ font-size:0.76rem; color:var(--text-soft); margin-top:16px; line-height:1.6; }
+  .rc-contacts{ display:flex; gap:16px; margin-top:24px; flex-wrap:wrap; }
+  .rc-contact-card{
+    flex:1; min-width:220px; background:var(--paper); border:1px solid var(--line);
+    border-radius:8px; padding:14px 16px;
+  }
+  .rc-contact-label{ font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-soft); font-weight:700; }
+  .rc-contact-name{ font-size:0.95rem; font-weight:600; margin:4px 0 2px; }
+  .rc-contact-detail{ font-size:0.82rem; color:var(--text-soft); margin-bottom:8px; }
+  .rc-newsletter{
+    margin-top:18px; padding:14px 16px; background:var(--brand-blue-soft);
+    border-radius:8px; border:1px solid var(--brand-blue-soft);
+  }
+  .remark-box{
+    width:100%; font-family:inherit; font-size:0.85rem; padding:8px 10px;
+    border:1px solid var(--line); border-radius:6px; resize:vertical; background:#fff;
+  }
+  .sparkline-wrap{ margin-top:10px; }
+  @media print{
+    body *{ visibility:hidden; }
+    .report-card, .report-card *{ visibility:visible; }
+    .report-card{ position:absolute; top:0; left:0; width:100%; border:none; padding:0; }
+    .no-print{ display:none !important; }
+  }
+</style>
+<style>
+  .center-pick-list{ display:flex; flex-direction:column; gap:8px; margin:14px 0; }
+  .center-pick-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 14px; border:1px solid var(--line); border-radius:8px;
+    background:var(--paper-raised); cursor:pointer; text-align:left;
+  }
+  .center-pick-item:hover{ border-color:var(--brand-blue); }
+  .center-pick-item .cname{ font-weight:600; font-size:0.9rem; }
+  .center-pick-item .ccode{ font-size:0.75rem; color:var(--text-soft); font-family:'IBM Plex Mono',monospace; }
+  .api-banner{
+    position:fixed; bottom:0; left:0; right:0; z-index:999;
+    background:var(--error); color:#fff; text-align:center;
+    font-size:0.8rem; padding:8px; display:none;
+  }
+  .api-banner.show{ display:block; }
+  .spinner-row{ padding:30px; text-align:center; color:var(--text-soft); font-size:0.85rem; }
+  .cred-card{
+    border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin-bottom:12px;
+    background:var(--paper-raised);
+  }
+  .cred-role{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-soft); font-weight:700; margin-bottom:8px; }
+  .cred-row{ display:flex; align-items:center; gap:10px; padding:5px 0; }
+  .cred-row + .cred-row{ border-top:1px dashed var(--line); }
+  .cred-label{ width:70px; flex-shrink:0; font-size:0.8rem; color:var(--text-soft); }
+  .cred-value{ flex:1; font-size:0.92rem; font-weight:600; word-break:break-all; }
+  .cred-row .btn.small{ flex-shrink:0; }
+</style>
+</head>
+</head>
+<body>
+
+<div class="letterhead">
+    <div class="seal"><img src="data:image/png;base64,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" alt="MOHI school logo"></div>
+  <div>
+    <h1>Missions of <span class="accent">Hope</span> International</h1>
+    <p>Results &amp; Analytics</p>
+  </div>
+</div>
+
+<div class="stage">
+
+  <!-- LOGIN -->
+  <div id="loginScreen" class="login-hero">
+    <div class="login-illustration">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 30 L180 65 L100 100 L20 65 Z" fill="var(--brand-blue)"/>
+        <path d="M20 65 L20 120 Q20 128 27 131 L93 158 Q100 161 107 158 L173 131 Q180 128 180 120 L180 65" stroke="var(--brand-blue-soft)" stroke-width="4" fill="none" opacity="0.6"/>
+        <line x1="165" y1="72" x2="165" y2="128" stroke="#6FCF97" stroke-width="4"/>
+        <circle cx="165" cy="133" r="6" fill="#6FCF97"/>
+        <circle cx="100" cy="100" r="4" fill="#fff" opacity="0.9"/>
+      </svg>
+      <div class="tagline">
+        <h2>Every learner, every center</h2>
+        <p>One results system for every Missions of Hope International center — exam entry, grading and report cards, built for how our centers actually work. Starting with Ndovoini Center; more centers join the same system as they're onboarded.</p>
+      </div>
+    </div>
+    <div class="login-panel">
+    <div class="folder">
+      <p class="eyebrow">Sign in</p>
+      <div class="tabs">
+        <button class="tab active" data-role="admin">Admin</button>
+        <button class="tab" data-role="teacher">Teacher</button>
+        <button class="tab" data-role="student">Student &amp; Parent</button>
+      </div>
+      <div class="card">
+
+        <div id="adminLogin">
+          <h2>Admin sign in</h2>
+          <p class="sub">School admin, or IT support (picks a center next).</p>
+          <div id="adminError"></div>
+          <label for="adminEmail">Admin email</label>
+          <input type="text" id="adminEmail" placeholder="admin@ndovoini.mohiafrica.org">
+          <label for="adminPass">Password</label>
+          <div class="pw-wrap"><input type="password" id="adminPass"><button type="button" class="pw-toggle" onclick="togglePw('adminPass',this)">Show</button></div>
+          <button class="btn" onclick="loginAdmin()">Sign in</button>
+          <p class="hint">Forgot your password? <a href="#" onclick="openForgotPassword('admin');return false;">Get help from IT</a></p>
+        </div>
+
+        <div id="teacherLogin" style="display:none;">
+          <h2>Teacher sign in</h2>
+          <p class="sub">Shared staff login — you'll pick your name next.</p>
+          <div id="teacherError"></div>
+          <label for="teacherEmail">Staff email</label>
+          <input type="text" id="teacherEmail" placeholder="ndovoini@mohiafrica.org">
+          <label for="teacherPass">Password</label>
+          <div class="pw-wrap"><input type="password" id="teacherPass"><button type="button" class="pw-toggle" onclick="togglePw('teacherPass',this)">Show</button></div>
+          <button class="btn" onclick="loginTeacher()">Sign in</button>
+          <p class="hint">Forgot your password? <a href="#" onclick="openForgotPassword('teacher');return false;">Get help from IT</a></p>
+        </div>
+
+        <div id="studentLogin" style="display:none;">
+          <h2>Student &amp; Parent sign in</h2>
+          <p class="sub">Use the student's School ID Number.</p>
+          <div id="studentError"></div>
+          <label for="schoolId">School ID number</label>
+          <input type="text" id="schoolId" placeholder="e.g. MOHI-0101">
+          <label for="studentPass">Password</label>
+          <div class="pw-wrap"><input type="password" id="studentPass"><button type="button" class="pw-toggle" onclick="togglePw('studentPass',this)">Show</button></div>
+          <button class="btn" onclick="loginStudent()">Sign in</button>
+          <p class="hint">Forgot your password? <a href="#" onclick="openForgotPassword('student');return false;">Get help from IT</a></p>
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- ADMIN SHELL -->
+  <div id="adminShell" class="app-shell">
+    <div class="admin-body" id="adminBody">
+      <div class="sidebar" id="adminSidebar">
+        <div class="sidebar-brand"><img id="sidebarBrandLogo" src="" alt="School logo"><span class="name" id="sidebarCenterName">Ndovoini Center<br>Missions of Hope Intl.</span></div>
+        <button class="nav-item active" data-view="overview"><span class="n">01</span> Overview</button>
+        <button class="nav-item" data-view="centers"><span class="n">02</span> Centers</button>
+        <button class="nav-item" data-view="classes"><span class="n">03</span> Classes</button>
+        <button class="nav-item" data-view="subjects"><span class="n">04</span> Subjects</button>
+        <button class="nav-item" data-view="teachers"><span class="n">05</span> Teachers</button>
+        <button class="nav-item" data-view="students"><span class="n">06</span> Students</button>
+        <button class="nav-item" data-view="exams"><span class="n">07</span> Exams</button>
+        <button class="nav-item" data-view="results"><span class="n">08</span> Results</button>
+        <button class="nav-item" data-view="notifications"><span class="n">09</span> Notifications<span id="pendingBadge"></span></button>
+        <div class="it-center-switch no-print" id="itCenterSwitch" style="display:none;">
+          <span class="it-current">IT &middot; <strong id="itCurrentCenter">—</strong></span>
+          <select id="itSwitchSelect" onchange="handleItSwitch(this.value)"></select>
+        </div>
+        <button class="nav-item logout" onclick="logout()">&larr; Log out</button>
+      </div>
+      <div class="main" id="adminMain"></div>
+    </div>
+  </div>
+
+  <!-- TEACHER SHELL -->
+  <div id="teacherShell" class="app-shell">
+    <div class="main" style="width:100%;">
+      <div class="top-welcome">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <img id="teacherHeaderLogo" class="header-logo" src="" alt="School logo">
+          <div>
+            <h2 id="teacherWelcome">Welcome</h2>
+            <p class="lede who" id="teacherClassInfo"></p>
+          </div>
+        </div>
+        <button class="btn ghost" style="width:auto;padding:9px 16px;" onclick="logout()">Log out</button>
+      </div>
+      <div id="teacherMain"></div>
+    </div>
+  </div>
+
+  <!-- STUDENT/PARENT SHELL -->
+  <div id="studentShell" class="app-shell">
+    <div class="main" style="width:100%;">
+      <div class="top-welcome no-print">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <img id="studentHeaderLogo" class="header-logo" src="" alt="School logo">
+          <div>
+            <h2 id="studentWelcome">Welcome</h2>
+            <p class="lede who" id="studentClassInfo"></p>
+          </div>
+        </div>
+        <button class="btn ghost" style="width:auto;padding:9px 16px;" onclick="logout()">Log out</button>
+      </div>
+      <div id="studentMain"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="api-banner" id="apiBanner">Can't reach the server right now. Check your connection and try again.</div>
+
+<!-- Force password change modal -->
+<div class="modal-back" id="pwModalBack">
+  <div class="modal">
+    <h3>Set a new password</h3>
+    <p>This is your first time signing in. Choose a new password to replace the default one.</p>
+    <div id="pwError"></div>
+    <label for="newPw1">New password</label>
+    <input type="password" id="newPw1">
+    <label for="newPw2">Confirm new password</label>
+    <input type="password" id="newPw2">
+    <button class="btn gold" onclick="setNewPassword()">Save password &amp; continue</button>
+  </div>
+</div>
+
+<!-- Generic modal (student edit, teacher bio, center add, etc.) -->
+<div class="modal-back" id="genericModalBack">
+  <div class="modal" id="genericModalContent" style="max-width:460px;"></div>
+</div>
+
+<script>
+/* =====================================================================
+   API LAYER — this file talks to a real backend instead of local/browser
+   storage. Change API_BASE to point at wherever the backend is deployed.
+   ===================================================================== */
+const API_BASE = (window.MOHI_API_BASE !== undefined) ? window.MOHI_API_BASE : '';
+// '' = same origin — this file is now served BY the backend (see server.js),
+// so /auth/..., /classes, etc. hit the same host automatically. No separate
+// frontend host, no CORS setup, one URL to deploy and remember.
+
+let authToken = null;   // current session's JWT
+let authRole = null;    // 'admin' (school_admin or it_support) | 'teacher' | 'student'
+let authCenterId = null;
+let isItSupport = false;
+
+let currentTeacher = null;   // { id, full_name }
+let currentStudent = null;   // { id, name }
+let pendingStudentResetToken = null;
+
+async function api(path, { method = 'GET', body, auth = true } = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (auth && authToken) headers.Authorization = `Bearer ${authToken}`;
+  let res;
+  try {
+    res = await fetch(`${API_BASE}${path}`, {
+      method, headers, body: body !== undefined ? JSON.stringify(body) : undefined,
+    });
+  } catch (err) {
+    showApiBanner(true);
+    throw new Error('Network error — could not reach the server.');
+  }
+  showApiBanner(false);
+  let data = null;
+  try { data = await res.json(); } catch { /* empty body, e.g. 204 */ }
+  if (!res.ok) {
+    const err = new Error((data && data.error) || `Request failed (${res.status})`);
+    err.status = res.status;
+    err.data = data;
+    throw err;
+  }
+  return data;
+}
+function showApiBanner(show) {
+  const el = document.getElementById('apiBanner');
+  if (el) el.classList.toggle('show', show);
+}
+
+/* ---------- GRADING (mirrors src/lib/grading.js on the backend) ---------- */
+const SUBLEVELS = ['EE1','EE2','ME1','ME2','AE1','AE2','BE1','BE2'];
+const SUBLEVEL_POINTS = { EE1:8, EE2:7, ME1:6, ME2:5, AE1:4, AE2:3, BE1:2, BE2:1 };
+const SUBLEVEL_LABELS = {
+  EE1:'EE1 · Exceeding (8)', EE2:'EE2 · Exceeding (7)',
+  ME1:'ME1 · Meeting (6)',   ME2:'ME2 · Meeting (5)',
+  AE1:'AE1 · Approaching (4)', AE2:'AE2 · Approaching (3)',
+  BE1:'BE1 · Below (2)',     BE2:'BE2 · Below (1)'
+};
+function levelOf(sublevel){ return sublevel ? sublevel.slice(0,2) : ''; }
+const SECTION_LABELS = { PRIMARY: 'Primary School', JUNIOR: 'Junior School', SENIOR: 'Senior School' };
+function sectionLabel(s){ return SECTION_LABELS[s] || s || '—'; }
+
+function escapeHtml(v){
+  return String(v ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+function csvEscape(v){
+  v = String(v ?? '');
+  return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+}
+function downloadCSV(filename, rows){
+  const csv = rows.map(r => r.map(csvEscape).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function csvResultBox(added, skipped, noun){
+  const head = `<div class="status-pill ${skipped.length ? 'draft':'published'}" style="display:inline-block;">${added} ${noun}${added===1?'':'s'} added${skipped.length ? `, ${skipped.length} skipped` : ''}</div>`;
+  const list = skipped.length ? `<ul style="font-size:0.78rem;color:var(--text-soft);margin:8px 0 0;padding-left:18px;">${skipped.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ul>` : '';
+  return `<div style="margin-top:12px;">${head}${list}</div>`;
+}
+// Reads a <input type=file> element's chosen file as text — used by every
+// CSV bulk-upload panel below.
+function readFileAsText(inputEl){
+  return new Promise((resolve, reject)=>{
+    if(!inputEl.files.length) return reject(new Error('Choose a CSV file first.'));
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('Could not read that file.'));
+    reader.readAsText(inputEl.files[0]);
+  });
+}
+
+function togglePw(id, btn){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const show = el.type === 'password';
+  el.type = show ? 'text' : 'password';
+  btn.textContent = show ? 'Hide' : 'Show';
+}
+
+function openModal(html){
+  document.getElementById('genericModalContent').innerHTML = html;
+  document.getElementById('genericModalBack').classList.add('visible');
+}
+function closeModal(){
+  document.getElementById('genericModalBack').classList.remove('visible');
+  document.getElementById('genericModalContent').innerHTML = '';
+}
+function clearError(id){ const el = document.getElementById(id); if(el) el.innerHTML=''; }
+function showError(id, msg){ const el = document.getElementById(id); if(el) el.innerHTML = `<div class="error-msg">${escapeHtml(msg)}</div>`; }
+</script>
+
+<script>
+/* =====================================================================
+   LOGIN — tab switching + all four flows (school admin, IT support with
+   center picker, teacher shared login with "which teacher are you", and
+   student/parent with forced first-login password reset).
+   ===================================================================== */
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('adminLogin').style.display = tab.dataset.role==='admin' ? 'block':'none';
+    document.getElementById('teacherLogin').style.display = tab.dataset.role==='teacher' ? 'block':'none';
+    document.getElementById('studentLogin').style.display = tab.dataset.role==='student' ? 'block':'none';
+  });
+});
+
+/* ---------- ADMIN (school_admin or it_support) ---------- */
+async function loginAdmin(){
+  clearError('adminError');
+  const email = document.getElementById('adminEmail').value.trim();
+  const password = document.getElementById('adminPass').value;
+  if(!email || !password){ showError('adminError', 'Enter an email and password.'); return; }
+  try{
+    const data = await api('/auth/admin/login', { method:'POST', body:{ email, password }, auth:false });
+    authToken = data.token; authRole = 'admin'; authCenterId = data.admin.centerId; isItSupport = !!data.isItSupport;
+    enterAdminShell();
+  }catch(err){ showError('adminError', err.message); }
+}
+async function handleItSwitch(centerId){
+  if(!centerId) return;
+  try{
+    const data = await api('/auth/admin/switch-center', { method:'POST', body:{ centerId } });
+    authToken = data.token; authCenterId = centerId;
+    document.getElementById('itCurrentCenter').textContent = data.center.name;
+    document.getElementById('sidebarCenterName').innerHTML = `${escapeHtml(data.center.name)}<br>Missions of Hope Intl.`;
+    renderAdminView(currentAdminView || 'overview');
+  }catch(err){ alert(err.message); }
+}
+
+/* ---------- TEACHER (one shared login per center, all sections) ---------- */
+let pendingTeacherToken = null;
+async function loginTeacher(){
+  clearError('teacherError');
+  const email = document.getElementById('teacherEmail').value.trim();
+  const password = document.getElementById('teacherPass').value;
+  if(!email || !password){ showError('teacherError', 'Enter an email and password.'); return; }
+  try{
+    const data = await api('/auth/teacher/login', { method:'POST', body:{ email, password }, auth:false });
+    pendingTeacherToken = data.pendingToken;
+    promptTeacherName(data.teachers);
+  }catch(err){ showError('teacherError', err.message); }
+}
+function promptTeacherName(teachers){
+  const card = document.getElementById('teacherLogin');
+  const options = teachers.map(t=>`<option value="${t.id}">${escapeHtml(t.full_name)}</option>`).join('');
+  card.innerHTML = `
+    <h2>Which teacher are you?</h2>
+    <p class="sub">This keeps mark entries traceable to a person, even on a shared login.</p>
+    <label for="teacherSelectName">Select your name</label>
+    <select id="teacherSelectName">${options || '<option value="">No teachers added yet</option>'}</select>
+    <button class="btn" onclick="confirmTeacher()" ${teachers.length ? '' : 'disabled'}>Continue</button>
+    ${teachers.length ? '' : `<p class="hint">Ask your School Admin to add teachers under Teachers.</p>`}
+  `;
+}
+async function confirmTeacher(){
+  const teacherId = document.getElementById('teacherSelectName').value;
+  try{
+    const data = await api('/auth/teacher/select', { method:'POST', body:{ pendingToken: pendingTeacherToken, teacherId }, auth:false });
+    authToken = data.token; authRole = 'teacher'; authCenterId = null; // centerId is baked into the token, not needed client-side
+    currentTeacher = data.teacher;
+    enterTeacherShell();
+  }catch(err){ alert(err.message); }
+}
+
+/* ---------- STUDENT / PARENT ---------- */
+async function loginStudent(){
+  clearError('studentError');
+  const schoolIdNumber = document.getElementById('schoolId').value.trim();
+  const password = document.getElementById('studentPass').value;
+  if(!schoolIdNumber || !password){ showError('studentError', 'Enter a School ID number and password.'); return; }
+  try{
+    const data = await api('/auth/student/login', { method:'POST', body:{ schoolIdNumber, password }, auth:false });
+    if(data.needsPasswordChange){
+      pendingStudentResetToken = data.resetToken;
+      document.getElementById('pwModalBack').classList.add('visible');
+    } else {
+      authToken = data.token; authRole = 'student'; authCenterId = null;
+      currentStudent = data.student;
+      enterStudentShell();
+    }
+  }catch(err){ showError('studentError', err.message); }
+}
+async function setNewPassword(){
+  clearError('pwError');
+  const p1 = document.getElementById('newPw1').value;
+  const p2 = document.getElementById('newPw2').value;
+  if(p1.length < 6){ showError('pwError', 'Password must be at least 6 characters.'); return; }
+  if(p1 !== p2){ showError('pwError', "Passwords don't match."); return; }
+  try{
+    const data = await api('/auth/student/set-password', { method:'POST', body:{ resetToken: pendingStudentResetToken, newPassword: p1 }, auth:false });
+    authToken = data.token; authRole = 'student'; authCenterId = null;
+    document.getElementById('pwModalBack').classList.remove('visible');
+    document.getElementById('newPw1').value=''; document.getElementById('newPw2').value='';
+    const idVal = document.getElementById('schoolId').value.trim();
+    currentStudent = { id: idVal, name: '' }; // full name comes from /students on first render
+    enterStudentShell();
+  }catch(err){ showError('pwError', err.message); }
+}
+
+/* ---------- FORGOT PASSWORD ---------- */
+// Never resets anything itself — just files a request IT/admin can see and
+// action from Notifications (see renderPasswordResetRequests below).
+function openForgotPassword(role){
+  const roleLabel = role === 'admin' ? 'Admin' : role === 'teacher' ? 'Teacher' : 'Student / Parent';
+  const idLabel = role === 'student' ? 'School ID number' : 'Email';
+  openModal(`
+    <h2>Forgot password</h2>
+    <p class="sub">${escapeHtml(roleLabel)} — this sends a request to IT/your School Admin. They'll reset it and get in touch with you directly; nothing changes automatically.</p>
+    <div id="forgotPwError"></div>
+    <label for="forgotPwIdentifier">${escapeHtml(idLabel)}</label>
+    <input type="text" id="forgotPwIdentifier">
+    <label for="forgotPwNote">Anything else IT should know? (optional)</label>
+    <input type="text" id="forgotPwNote">
+    <button class="btn" onclick="submitForgotPassword('${role}')">Send request</button>
+  `);
+}
+async function submitForgotPassword(role){
+  clearError('forgotPwError');
+  const identifier = document.getElementById('forgotPwIdentifier').value.trim();
+  const note = document.getElementById('forgotPwNote').value.trim();
+  if(!identifier){ showError('forgotPwError', role === 'student' ? 'Enter the School ID number.' : 'Enter the email.'); return; }
+  try{
+    await api('/auth/forgot-password', { method:'POST', body:{ role, identifier, note }, auth:false });
+    document.getElementById('genericModalContent').innerHTML = `
+      <h2>Request sent</h2>
+      <p class="sub">IT/your School Admin has been notified and will reach out once your password is reset.</p>
+      <button class="btn" onclick="closeModal()">Close</button>
+    `;
+  }catch(err){ showError('forgotPwError', err.message); }
+}
+
+function logout(){
+  document.querySelectorAll('.app-shell').forEach(s=>s.classList.remove('visible'));
+  document.getElementById('loginScreen').style.display='grid';
+  document.getElementById('teacherMain').innerHTML='';
+  document.getElementById('studentMain').innerHTML='';
+  document.getElementById('adminSidebar').classList.remove('horizontal');
+  document.getElementById('adminBody').classList.remove('it-mode');
+  document.getElementById('itCenterSwitch').style.display='none';
+  authToken = null; authRole = null; authCenterId = null; isItSupport = false;
+  currentTeacher = null; currentStudent = null;
+  document.getElementById('adminEmail').value='';
+  document.getElementById('adminPass').value='';
+  document.getElementById('teacherEmail').value='';
+  document.getElementById('teacherPass').value='';
+  document.getElementById('schoolId').value='';
+  document.getElementById('studentPass').value='';
+  // restore the login card contents in case a "which teacher/center" step overwrote them
+  document.getElementById('adminLogin').innerHTML = ADMIN_LOGIN_HTML;
+  document.getElementById('teacherLogin').innerHTML = TEACHER_LOGIN_HTML;
+}
+const ADMIN_LOGIN_HTML = document.getElementById('adminLogin').innerHTML;
+const TEACHER_LOGIN_HTML = document.getElementById('teacherLogin').innerHTML;
+</script>
+
+<script>
+/* =====================================================================
+   ADMIN SHELL
+   ===================================================================== */
+let currentAdminView = 'overview';
+
+async function enterAdminShell(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('adminShell').classList.add('visible');
+  applyBrandLogoEverywhere();
+
+  document.getElementById('adminSidebar').classList.toggle('horizontal', isItSupport);
+  document.getElementById('adminBody').classList.toggle('it-mode', isItSupport);
+  document.getElementById('itCenterSwitch').style.display = isItSupport ? 'flex' : 'none';
+  if(isItSupport){
+    try{
+      const centers = await api('/centers');
+      const sel = document.getElementById('itSwitchSelect');
+      sel.innerHTML = centers.map(c=>`<option value="${c.id}" ${c.id===authCenterId?'selected':''}>${escapeHtml(c.name)}</option>`).join('');
+      const current = centers.find(c=>c.id===authCenterId);
+      document.getElementById('itCurrentCenter').textContent = current ? current.name : '—';
+      document.getElementById('sidebarCenterName').innerHTML = current ? `${escapeHtml(current.name)}<br>Missions of Hope Intl.` : 'Missions of Hope Intl.';
+    }catch(err){ /* non-fatal — strip just won't populate */ }
+  } else {
+    try{
+      const centers = await api('/centers');
+      if(centers[0]) document.getElementById('sidebarCenterName').innerHTML = `${escapeHtml(centers[0].name)}<br>Missions of Hope Intl.`;
+    }catch(err){ /* keep default label */ }
+  }
+
+  renderAdminView('overview');
+}
+
+document.querySelectorAll('.nav-item[data-view]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.nav-item[data-view]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderAdminView(btn.dataset.view);
+  });
+});
+
+async function renderAdminView(view){
+  currentAdminView = view;
+  const main = document.getElementById('adminMain');
+  main.innerHTML = '<div class="spinner-row">Loading…</div>';
+  refreshPendingBadge();
+  try{
+    if(view==='overview') return renderOverview(main);
+    if(view==='centers') return renderCenters(main);
+    if(view==='classes') return renderClasses(main);
+    if(view==='subjects') return renderSubjects(main);
+    if(view==='teachers') return renderTeachers(main);
+    if(view==='students') return renderStudents(main);
+    if(view==='exams') return renderExams(main);
+    if(view==='results') return renderResults(main);
+    if(view==='notifications') return renderNotifications(main);
+  }catch(err){
+    main.innerHTML = `<div class="placeholder-box"><div class="tagline">Something went wrong loading this</div>${escapeHtml(err.message)}</div>`;
+  }
+}
+
+async function refreshPendingBadge(){
+  const el = document.getElementById('pendingBadge');
+  if(!el) return;
+  try{
+    const pending = await api('/edit-requests?status=pending');
+    el.textContent = pending.length ? ` (${pending.length})` : '';
+  }catch{ /* ignore */ }
+}
+
+async function renderOverview(main){
+  const [classes, teachers, students, exams] = await Promise.all([
+    api('/classes'), api('/teachers'), api('/students'), api('/exams'),
+  ]);
+  main.innerHTML = `
+    <h2>Overview</h2>
+    <p class="lede">Live from the real database — not local browser storage.</p>
+    <div class="badge-row">
+      <div class="stat"><span class="num">${classes.length}</span><span class="lbl">Classes</span></div>
+      <div class="stat"><span class="num">${teachers.length}</span><span class="lbl">Teachers</span></div>
+      <div class="stat"><span class="num">${students.length}</span><span class="lbl">Students</span></div>
+      <div class="stat"><span class="num">${exams.length}</span><span class="lbl">Exam periods</span></div>
+    </div>
+    <div class="placeholder-box">
+      <div class="tagline">${isItSupport ? 'IT support session' : 'School admin session'}</div>
+      ${isItSupport
+        ? 'Use the center switcher above to move between centers. Every screen below reflects whichever center is currently selected.'
+        : 'This view only ever shows Ndovoini Center\'s own data — the server enforces that from your login token, not from anything chosen in this browser.'}
+    </div>
+  `;
+}
+
+/* ---------- CENTERS ---------- */
+async function renderCenters(main){
+  const centers = await api('/centers');
+  const rows = centers.map((c,i)=>`
+    <tr>
+      <td class="idx">${String(i+1).padStart(2,'0')}</td>
+      <td>${escapeHtml(c.name)}</td>
+      <td><span class="tag">${escapeHtml(c.center_code)}</span></td>
+      <td>${escapeHtml(c.location || '—')}</td>
+      <td><span class="status-pill ${c.is_active?'published':'draft'}">${c.is_active?'● Active':'○ Inactive'}</span></td>
+      ${isItSupport ? `<td><button class="btn small ghost" onclick="toggleCenterActive('${c.id}', ${!c.is_active})">${c.is_active?'Deactivate':'Activate'}</button></td>` : ''}
+    </tr>`).join('');
+  main.innerHTML = `
+    <h2>Centers</h2>
+    <p class="lede">${isItSupport ? 'Every MOHI center in the system.' : 'This is the one center your login can see — a school admin never sees another center\'s row here, let alone its data.'}</p>
+    ${isItSupport ? `
+    <div class="panel">
+      <h3>Add a center</h3>
+      <div class="row-form">
+        <div class="field"><label for="newCenterName">Name</label><input type="text" id="newCenterName" placeholder="e.g. Kayole Center"></div>
+        <div class="field"><label for="newCenterCode">Code</label><input type="text" id="newCenterCode" placeholder="e.g. MOHI-KYL"></div>
+        <div class="field"><label for="newCenterLocation">Location</label><input type="text" id="newCenterLocation" placeholder="e.g. Nairobi, Kenya"></div>
+        <button class="btn" onclick="addCenter()">Add center</button>
+      </div>
+    </div>` : ''}
+    <div class="panel">
+      <table><thead><tr><th></th><th>Name</th><th>Code</th><th>Location</th><th>Status</th>${isItSupport ? '<th></th>' : ''}</tr></thead><tbody>${rows}</tbody></table>
+    </div>
+  `;
+}
+async function addCenter(){
+  const name = document.getElementById('newCenterName').value.trim();
+  const centerCode = document.getElementById('newCenterCode').value.trim();
+  const location = document.getElementById('newCenterLocation').value.trim();
+  if(!name || !centerCode) return;
+  try{
+    const center = await api('/centers', { method:'POST', body:{ name, centerCode, location } });
+    renderCenters(document.getElementById('adminMain'));
+    openModal(`
+      <h3>${escapeHtml(center.name)} added</h3>
+      <p class="sub" style="margin-bottom:14px;">Login details for this center. Share these directly with the school admin and the teaching staff — each should change their password after first login.</p>
+      <div class="cred-card">
+        <div class="cred-role">School Admin login</div>
+        <div class="cred-row"><span class="cred-label">Email</span><span class="cred-value">${escapeHtml(center.logins.admin.email)}</span><button type="button" class="btn small ghost" onclick="copyCred(this,'${escapeHtml(center.logins.admin.email)}')">Copy</button></div>
+        <div class="cred-row"><span class="cred-label">Password</span><span class="cred-value">${escapeHtml(center.logins.admin.password)}</span><button type="button" class="btn small ghost" onclick="copyCred(this,'${escapeHtml(center.logins.admin.password)}')">Copy</button></div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-role">Staff login (shared, all sections)</div>
+        <div class="cred-row"><span class="cred-label">Email</span><span class="cred-value">${escapeHtml(center.logins.teacher.email)}</span><button type="button" class="btn small ghost" onclick="copyCred(this,'${escapeHtml(center.logins.teacher.email)}')">Copy</button></div>
+        <div class="cred-row"><span class="cred-label">Password</span><span class="cred-value">${escapeHtml(center.logins.teacher.password)}</span><button type="button" class="btn small ghost" onclick="copyCred(this,'${escapeHtml(center.logins.teacher.password)}')">Copy</button></div>
+      </div>
+      <button class="btn gold" style="width:auto; padding:9px 18px; margin-top:14px;" onclick="closeModal()">Got it</button>
+    `);
+  }catch(err){ alert(err.message); }
+}
+function copyCred(btn, value){
+  navigator.clipboard.writeText(value).then(()=>{
+    const original = btn.textContent;
+    btn.textContent = 'Copied';
+    setTimeout(()=>{ btn.textContent = original; }, 1200);
+  }).catch(()=>{ /* clipboard unavailable — user can still select the text manually */ });
+}
+async function toggleCenterActive(id, isActive){
+  try{
+    await api(`/centers/${id}/active`, { method:'PATCH', body:{ isActive } });
+    renderCenters(document.getElementById('adminMain'));
+  }catch(err){ alert(err.message); }
+}
+</script>
+
+<script>
+/* =====================================================================
+   CLASSES
+   ===================================================================== */
+async function renderClasses(main){
+  const [classes, teachers] = await Promise.all([api('/classes'), api('/teachers')]);
+  const byGrade = {};
+  classes.forEach(c=>{ (byGrade[c.grade] ??= []).push(c); });
+
+  const groups = Object.keys(byGrade).sort().map(g=>{
+    const rows = byGrade[g].map(c=>{
+      const eligibleTeachers = teachers.filter(t=> (t.class_ids||[]).includes(c.id));
+      const opts = eligibleTeachers.map(t=>`<option value="${t.id}" ${c.class_teacher_id===t.id?'selected':''}>${escapeHtml(t.full_name)}</option>`).join('');
+      return `<tr>
+        <td>${escapeHtml(c.stream || '—')}</td>
+        <td>${escapeHtml(c.name)}</td>
+        <td><span class="tag">${sectionLabel(c.section)}</span></td>
+        <td><select onchange="setClassTeacher('${c.id}', this.value)"><option value="">— none —</option>${opts}</select></td>
+        <td><button class="del" onclick="deleteClass('${c.id}')">Remove</button></td>
+      </tr>`;
+    }).join('');
+    return `<div style="margin-top:18px;">
+      <h3 style="margin-bottom:8px;">${escapeHtml(g)} <span style="font-weight:400; color:var(--text-soft); font-size:0.82rem;">— ${byGrade[g].length} stream${byGrade[g].length===1?'':'s'}</span></h3>
+      <table><thead><tr><th>Stream</th><th>Full name</th><th>Section</th><th>Class teacher</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }).join('');
+
+  main.innerHTML = `
+    <h2>Classes</h2>
+    <p class="lede">Grade + stream, e.g. Grade 8 can have several streams (Green, Blue…), each its own class.</p>
+    <div class="panel">
+      <h3>Add a class</h3>
+      <div class="row-form">
+        <div class="field"><label for="newClassGrade">Grade</label><input type="text" id="newClassGrade" placeholder="e.g. Grade 8"></div>
+        <div class="field"><label for="newClassStream">Stream</label><input type="text" id="newClassStream" placeholder="e.g. Green"></div>
+        <div class="field"><label for="newClassSection">Section</label>
+          <select id="newClassSection">
+            <option value="PRIMARY">Primary School</option>
+            <option value="JUNIOR" selected>Junior School</option>
+            <option value="SENIOR">Senior School</option>
+          </select>
+        </div>
+        <button class="btn" onclick="addClass()">Add class</button>
+      </div>
+      ${classes.length ? groups : '<div class="empty">No classes yet. Add the first one above.</div>'}
+    </div>
+  `;
+}
+async function addClass(){
+  const grade = document.getElementById('newClassGrade').value.trim();
+  const stream = document.getElementById('newClassStream').value.trim();
+  const section = document.getElementById('newClassSection').value;
+  if(!grade) return;
+  const name = stream ? `${grade} ${stream}` : grade;
+  try{
+    await api('/classes', { method:'POST', body:{ name, grade, stream, section } });
+    renderClasses(document.getElementById('adminMain'));
+  }catch(err){ alert(err.message); }
+}
+async function setClassTeacher(classId, teacherId){
+  try{ await api(`/classes/${classId}/class-teacher`, { method:'PATCH', body:{ teacherId: teacherId || null } }); }
+  catch(err){ alert(err.message); }
+}
+async function deleteClass(id){
+  try{ await api(`/classes/${id}`, { method:'DELETE' }); renderClasses(document.getElementById('adminMain')); }
+  catch(err){ alert(err.message); }
+}
+
+/* =====================================================================
+   SUBJECTS
+   ===================================================================== */
+async function renderSubjects(main){
+  const subjects = await api('/subjects');
+  const rows = subjects.map((s,i)=>`
+    <tr>
+      <td class="idx">${String(i+1).padStart(2,'0')}</td>
+      <td>${escapeHtml(s.name)}</td>
+      <td><span class="tag">${s.section ? sectionLabel(s.section) : 'All sections'}</span></td>
+      <td><button class="del" onclick="deleteSubject('${s.id}')">Remove</button></td>
+    </tr>`).join('');
+  main.innerHTML = `
+    <h2>Subjects</h2>
+    <p class="lede">Learning areas differ by section — tag a subject to Primary/Junior/Senior, or leave it for all sections.</p>
+    <div class="panel">
+      <h3>Add a subject</h3>
+      <div class="row-form">
+        <div class="field"><label for="newSubjectName">Subject name</label><input type="text" id="newSubjectName" placeholder="e.g. Integrated Science"></div>
+        <div class="field"><label for="newSubjectSection">Section</label>
+          <select id="newSubjectSection">
+            <option value="">All sections</option>
+            <option value="PRIMARY">Primary School</option>
+            <option value="JUNIOR">Junior School</option>
+            <option value="SENIOR">Senior School</option>
+          </select>
+        </div>
+        <button class="btn" onclick="addSubject()">Add subject</button>
+      </div>
+      ${subjects.length ? `<table><thead><tr><th></th><th>Name</th><th>Section</th><th></th></tr></thead><tbody>${rows}</tbody></table>` : '<div class="empty">No subjects yet.</div>'}
+    </div>
+  `;
+}
+async function addSubject(){
+  const name = document.getElementById('newSubjectName').value.trim();
+  const section = document.getElementById('newSubjectSection').value || null;
+  if(!name) return;
+  try{ await api('/subjects', { method:'POST', body:{ name, section } }); renderSubjects(document.getElementById('adminMain')); }
+  catch(err){ alert(err.message); }
+}
+async function deleteSubject(id){
+  try{ await api(`/subjects/${id}`, { method:'DELETE' }); renderSubjects(document.getElementById('adminMain')); }
+  catch(err){ alert(err.message); }
+}
+
+/* =====================================================================
+   TEACHERS
+   ===================================================================== */
+async function renderTeachers(main, summaryHtml){
+  const [teachers, classes, subjects] = await Promise.all([api('/teachers'), api('/classes'), api('/subjects')]);
+  const rows = teachers.map((t,i)=>{
+    const classNames = (t.class_ids||[]).map(id=>(classes.find(c=>c.id===id)||{}).name).filter(Boolean).join(', ');
+    const subjNames = (t.subject_ids||[]).map(id=>(subjects.find(s=>s.id===id)||{}).name).filter(Boolean).join(', ');
+    return `<tr>
+      <td class="idx">${String(i+1).padStart(2,'0')}</td>
+      <td>${escapeHtml(t.full_name)}</td>
+      <td><span class="tag">${sectionLabel(t.section)}</span></td>
+      <td><span class="tag">${classNames || '—'}</span></td>
+      <td>${subjNames || '—'}</td>
+      <td>${escapeHtml(t.phone || '—')}</td>
+      <td>
+        <button class="btn small ghost" onclick="openTeacherBioModal('${t.id}')">Edit / bio</button>
+        <button class="del" onclick="deleteTeacher('${t.id}')">Remove</button>
+      </td>
+    </tr>`;
+  }).join('');
+  const classOpts = classes.map(c=>`<option value="${c.id}">${escapeHtml(c.name)} — ${sectionLabel(c.section)}</option>`).join('');
+  const subjOpts = subjects.map(s=>`<option value="${s.id}">${escapeHtml(s.name)}</option>`).join('');
+  main.innerHTML = `
+    <h2>Teachers</h2>
+    <p class="lede">All staff at this center share one login — the section below is just each teacher's own classification (which classes make sense for them), not a separate login.</p>
+    <div class="panel">
+      <h3>Add a teacher</h3>
+      <div class="row-form">
+        <div class="field"><label for="newTeacherName">Full name</label><input type="text" id="newTeacherName" placeholder="e.g. Mrs. Grace Wambui"></div>
+        <div class="field"><label for="newTeacherPhone">Phone</label><input type="text" id="newTeacherPhone" placeholder="e.g. 0712 345 678"></div>
+        <div class="field"><label for="newTeacherSection">Section</label>
+          <select id="newTeacherSection">
+            <option value="PRIMARY">Primary School</option>
+            <option value="JUNIOR" selected>Junior School</option>
+            <option value="SENIOR">Senior School</option>
+          </select>
+        </div>
+        <div class="field"><label for="newTeacherClass">Class</label><select id="newTeacherClass">${classOpts || '<option value="">No classes yet</option>'}</select></div>
+        <div class="field"><label for="newTeacherSubject">Subject</label><select id="newTeacherSubject">${subjOpts || '<option value="">No subjects yet</option>'}</select></div>
+        <button class="btn" onclick="addTeacher()">Add teacher</button>
+      </div>
+      ${teachers.length ? `<table><thead><tr><th></th><th>Name</th><th>Section</th><th>Class(es)</th><th>Subjects</th><th>Phone</th><th></th></tr></thead><tbody>${rows}</tbody></table>` : '<div class="empty">No teachers yet.</div>'}
+    </div>
+    <div class="panel">
+      <h3>Bulk upload teachers (CSV)</h3>
+      <p class="sub">Columns: <strong>Full Name, Section, Class, Subject, Phone</strong>. Same name on multiple rows adds all of them to that one teacher. Section is PRIMARY, JUNIOR or SENIOR. <a href="#" onclick="downloadCSV('mohi-teachers-template.csv', [['Full Name','Section','Class','Subject','Phone'],['Mrs. Grace Wambui','JUNIOR','${classes[0]?escapeHtml(classes[0].name):'Grade 7 Blue'}','${subjects[0]?escapeHtml(subjects[0].name):'Mathematics'}','0712 345 678']]); return false;">Download CSV template</a></p>
+      <div class="row-form">
+        <div class="field"><label for="teacherCsvFile">CSV file</label><input type="file" id="teacherCsvFile" accept=".csv,text/csv"></div>
+        <button class="btn small" onclick="importTeachersCsv()">Upload &amp; add teachers</button>
+      </div>
+      ${summaryHtml || ''}
+    </div>
+  `;
+}
+async function importTeachersCsv(){
+  const fileInput = document.getElementById('teacherCsvFile');
+  try{
+    const csv = await readFileAsText(fileInput);
+    const result = await api('/teachers/bulk', { method:'POST', body:{ csv } });
+    fileInput.value = '';
+    renderTeachers(document.getElementById('adminMain'), csvResultBox(result.added, result.skipped, 'teacher'));
+  }catch(err){
+    renderTeachers(document.getElementById('adminMain'), `<div class="error-msg" style="margin-top:12px;">${escapeHtml(err.message)}</div>`);
+  }
+}
+async function addTeacher(){
+  const fullName = document.getElementById('newTeacherName').value.trim();
+  const phone = document.getElementById('newTeacherPhone').value.trim();
+  const section = document.getElementById('newTeacherSection').value;
+  const classId = document.getElementById('newTeacherClass').value;
+  const subjectId = document.getElementById('newTeacherSubject').value;
+  if(!fullName) return;
+  try{
+    await api('/teachers', { method:'POST', body:{ fullName, phone, section, classId, subjectId } });
+    renderTeachers(document.getElementById('adminMain'));
+  }catch(err){ alert(err.message); }
+}
+async function deleteTeacher(id){
+  try{ await api(`/teachers/${id}`, { method:'DELETE' }); renderTeachers(document.getElementById('adminMain')); }
+  catch(err){ alert(err.message); }
+}
+async function openTeacherBioModal(id){
+  const teachers = await api('/teachers');
+  const t = teachers.find(x=>x.id===id);
+  if(!t) return;
+  openModal(`
+    <h3>Edit teacher</h3>
+    <label for="editTchName">Full name</label>
+    <input type="text" id="editTchName" value="${escapeHtml(t.full_name)}">
+    <label for="editTchPhone">Phone</label>
+    <input type="text" id="editTchPhone" value="${escapeHtml(t.phone||'')}">
+    <label for="editTchBio">Bio (shown to parents via the report card contact link)</label>
+    <textarea id="editTchBio" rows="4" class="remark-box">${escapeHtml(t.bio||'')}</textarea>
+    <div style="display:flex; gap:10px; margin-top:14px;">
+      <button class="btn" style="width:auto; padding:9px 18px;" onclick="saveTeacherBio('${t.id}')">Save</button>
+      <button class="btn ghost" style="width:auto; padding:9px 18px;" onclick="closeModal()">Cancel</button>
+    </div>
+  `);
+}
+async function saveTeacherBio(id){
+  const fullName = document.getElementById('editTchName').value.trim();
+  const phone = document.getElementById('editTchPhone').value.trim();
+  const bio = document.getElementById('editTchBio').value.trim();
+  try{
+    await api(`/teachers/${id}`, { method:'PATCH', body:{ fullName, phone, bio } });
+    closeModal();
+    renderTeachers(document.getElementById('adminMain'));
+  }catch(err){ alert(err.message); }
+}
+async function viewTeacherBio(id){
+  // used from the student report card too — fetches via the teachers list the current user can read
+  try{
+    const teachers = await api('/teachers');
+    const t = teachers.find(x=>x.id===id);
+    if(!t) return;
+    openModal(`
+      <h3>${escapeHtml(t.full_name)}</h3>
+      <p class="sub" style="margin-bottom:14px;">${t.phone ? 'Phone: '+escapeHtml(t.phone) : 'No phone on file'}</p>
+      <p style="font-size:0.9rem; line-height:1.6;">${t.bio ? escapeHtml(t.bio) : 'No bio added yet.'}</p>
+      <button class="btn ghost" style="width:auto; padding:9px 18px; margin-top:10px;" onclick="closeModal()">Close</button>
+    `);
+  }catch(err){ /* students can't call /teachers directly today — see note in chat response */ }
+}
+
+/* =====================================================================
+   STUDENTS
+   ===================================================================== */
+async function renderStudents(main, summaryHtml){
+  const [students, classes] = await Promise.all([api('/students'), api('/classes')]);
+  const classOpts = classes.map(c=>`<option value="${c.id}">${escapeHtml(c.name)} — ${sectionLabel(c.section)}</option>`).join('');
+  const rows = students.map((s,i)=>{
+    const cls = classes.find(c=>c.id===s.class_id);
+    return `<tr>
+      <td class="idx">${String(i+1).padStart(2,'0')}</td>
+      <td>${escapeHtml(s.full_name)}</td>
+      <td><span class="tag">${escapeHtml(s.school_id_number)}</span></td>
+      <td>${cls ? escapeHtml(cls.name) : '—'}</td>
+      <td>${s.password_changed ? 'Password set' : 'Default password'}</td>
+      <td>
+        <button class="btn small ghost" onclick="openEditStudentModal('${s.id}')">Edit</button>
+        <button class="del" onclick="deleteStudent('${s.id}')">Remove</button>
+      </td>
+    </tr>`;
+  }).join('');
+  main.innerHTML = `
+    <h2>Students</h2>
+    <p class="lede">Each student gets a School ID Number for login — shared with their parent. Default password is Student@2026 until changed.</p>
+    <div class="panel">
+      <h3>Add a student</h3>
+      <div class="row-form">
+        <div class="field"><label for="newStudentName">Full name</label><input type="text" id="newStudentName" placeholder="e.g. Peter Kamau"></div>
+        <div class="field"><label for="newStudentId">School ID number</label><input type="text" id="newStudentId" placeholder="e.g. MOHI-0210"></div>
+        <div class="field"><label for="newStudentClass">Class</label><select id="newStudentClass">${classOpts || '<option value="">No classes yet</option>'}</select></div>
+        <button class="btn" onclick="addStudent()">Add student</button>
+      </div>
+      ${students.length ? `<table><thead><tr><th></th><th>Name</th><th>School ID</th><th>Class</th><th>Login status</th><th></th></tr></thead><tbody>${rows}</tbody></table>` : '<div class="empty">No students yet.</div>'}
+    </div>
+    <div class="panel">
+      <h3>Bulk upload students (CSV)</h3>
+      <p class="sub">Columns: <strong>Full Name, School ID, Class</strong>. Class must match an existing class name exactly. <a href="#" onclick="downloadCSV('mohi-students-template.csv', [['Full Name','School ID','Class'],['Peter Kamau','MOHI-0210','${classes[0] ? escapeHtml(classes[0].name) : 'Grade 7 Blue'}']]); return false;">Download CSV template</a></p>
+      <div class="row-form">
+        <div class="field"><label for="studentCsvFile">CSV file</label><input type="file" id="studentCsvFile" accept=".csv,text/csv"></div>
+        <button class="btn small" onclick="importStudentsCsv()">Upload &amp; add students</button>
+      </div>
+      ${summaryHtml || ''}
+    </div>
+  `;
+}
+async function importStudentsCsv(){
+  const fileInput = document.getElementById('studentCsvFile');
+  try{
+    const csv = await readFileAsText(fileInput);
+    const result = await api('/students/bulk', { method:'POST', body:{ csv } });
+    fileInput.value = '';
+    renderStudents(document.getElementById('adminMain'), csvResultBox(result.added, result.skipped, 'student'));
+  }catch(err){
+    renderStudents(document.getElementById('adminMain'), `<div class="error-msg" style="margin-top:12px;">${escapeHtml(err.message)}</div>`);
+  }
+}
+async function addStudent(){
+  const fullName = document.getElementById('newStudentName').value.trim();
+  const schoolIdNumber = document.getElementById('newStudentId').value.trim();
+  const classId = document.getElementById('newStudentClass').value;
+  if(!fullName || !schoolIdNumber) return;
+  try{
+    await api('/students', { method:'POST', body:{ fullName, schoolIdNumber, classId } });
+    renderStudents(document.getElementById('adminMain'));
+  }catch(err){ alert(err.message); }
+}
+async function deleteStudent(id){
+  try{ await api(`/students/${id}`, { method:'DELETE' }); renderStudents(document.getElementById('adminMain')); }
+  catch(err){ alert(err.message); }
+}
+async function openEditStudentModal(id){
+  const students = await api('/students');
+  const s = students.find(x=>x.id===id);
+  if(!s) return;
+  openModal(`
+    <h3>Edit student</h3>
+    <p class="hint" style="margin-bottom:10px;">Name and School ID changes need admin approval (see Notifications) — everything else here applies right away.</p>
+    <label for="editStuName">Full name</label>
+    <input type="text" id="editStuName" value="${escapeHtml(s.full_name)}">
+    <label for="editStuSchoolId">School ID number</label>
+    <input type="text" id="editStuSchoolId" value="${escapeHtml(s.school_id_number)}">
+    <label for="editStuParentName">Parent/guardian name</label>
+    <input type="text" id="editStuParentName" value="${escapeHtml(s.parent_name||'')}">
+    <label for="editStuParentPhone">Parent/guardian phone</label>
+    <input type="text" id="editStuParentPhone" value="${escapeHtml(s.parent_phone||'')}">
+    <label for="editStuParentEmail">Parent/guardian email</label>
+    <input type="text" id="editStuParentEmail" value="${escapeHtml(s.parent_email||'')}">
+    <div style="display:flex; gap:10px; margin-top:14px;">
+      <button class="btn" style="width:auto; padding:9px 18px;" onclick="saveStudentEdit('${s.id}','${escapeHtml(s.full_name)}','${escapeHtml(s.school_id_number)}')">Save</button>
+      <button class="btn ghost" style="width:auto; padding:9px 18px;" onclick="closeModal()">Cancel</button>
+    </div>
+  `);
+}
+async function saveStudentEdit(id, oldName, oldSchoolId){
+  const newName = document.getElementById('editStuName').value.trim();
+  const newSchoolId = document.getElementById('editStuSchoolId').value.trim();
+  const parentName = document.getElementById('editStuParentName').value.trim();
+  const parentPhone = document.getElementById('editStuParentPhone').value.trim();
+  const parentEmail = document.getElementById('editStuParentEmail').value.trim();
+  try{
+    await api(`/students/${id}`, { method:'PATCH', body:{ parentName, parentPhone, parentEmail } });
+    let queued = false;
+    if(newName && newName !== oldName){
+      await api('/edit-requests/student-edit', { method:'POST', body:{ studentId:id, field:'name', newValue:newName } });
+      queued = true;
+    }
+    if(newSchoolId && newSchoolId !== oldSchoolId){
+      await api('/edit-requests/student-edit', { method:'POST', body:{ studentId:id, field:'schoolId', newValue:newSchoolId } });
+      queued = true;
+    }
+    closeModal();
+    renderStudents(document.getElementById('adminMain'));
+    if(queued){ alert('Contact details saved. The name/School ID change has been sent to Notifications for approval.'); }
+  }catch(err){ alert(err.message); }
+}
+</script>
+
+<script>
+/* =====================================================================
+   EXAMS
+   ===================================================================== */
+async function renderExams(main){
+  const exams = await api('/exams');
+  const rows = exams.map((e,i)=>`
+    <tr>
+      <td class="idx">${String(i+1).padStart(2,'0')}</td>
+      <td>${escapeHtml(e.name)}</td>
+      <td>${escapeHtml(e.term||'—')}, ${escapeHtml(e.academic_year||'—')}</td>
+      <td><span class="status-pill ${e.is_published?'published':'draft'}">${e.is_published?'● Published':'○ Draft'}</span></td>
+      <td>
+        <button class="btn small ${e.is_published?'ghost':'gold'}" onclick="toggleExamPublish('${e.id}', ${!e.is_published})">${e.is_published?'Unpublish':'Publish'}</button>
+        <button class="del" onclick="deleteExam('${e.id}')">Remove</button>
+      </td>
+    </tr>`).join('');
+  main.innerHTML = `
+    <h2>Exams</h2>
+    <p class="lede">Create an exam period, then publish it once results are ready for parents and students to see.</p>
+    <div class="panel">
+      <h3>Add an exam period</h3>
+      <div class="row-form">
+        <div class="field"><label for="newExamName">Exam name</label><input type="text" id="newExamName" placeholder="e.g. Term 2 End-Term"></div>
+        <div class="field"><label for="newExamTerm">Term</label><input type="text" id="newExamTerm" placeholder="e.g. Term 2"></div>
+        <div class="field"><label for="newExamYear">Academic year</label><input type="text" id="newExamYear" placeholder="e.g. 2026"></div>
+      </div>
+      <div class="row-form">
+        <div class="field"><label for="newExamOpen">Term opens</label><input type="text" id="newExamOpen" placeholder="e.g. Mon 4 May 2026"></div>
+        <div class="field"><label for="newExamClose">Term closes</label><input type="text" id="newExamClose" placeholder="e.g. Fri 24 Apr 2026"></div>
+        <div class="field" style="flex:2;"><label for="newExamNewsletter">Newsletter blurb (optional)</label><input type="text" id="newExamNewsletter" placeholder="A short note shown on every report card"></div>
+        <button class="btn" onclick="addExam()">Add exam</button>
+      </div>
+      ${exams.length ? `<table><thead><tr><th></th><th>Name</th><th>Term / Year</th><th>Status</th><th></th></tr></thead><tbody>${rows}</tbody></table>` : '<div class="empty">No exam periods yet.</div>'}
+    </div>
+  `;
+}
+async function addExam(){
+  const name = document.getElementById('newExamName').value.trim();
+  const term = document.getElementById('newExamTerm').value.trim();
+  const academicYear = document.getElementById('newExamYear').value.trim();
+  const opensOn = document.getElementById('newExamOpen').value.trim();
+  const closesOn = document.getElementById('newExamClose').value.trim();
+  const newsletter = document.getElementById('newExamNewsletter').value.trim();
+  if(!name) return;
+  try{
+    await api('/exams', { method:'POST', body:{ name, term, academicYear, opensOn, closesOn, newsletter } });
+    renderExams(document.getElementById('adminMain'));
+  }catch(err){ alert(err.message); }
+}
+async function toggleExamPublish(id, isPublished){
+  try{ await api(`/exams/${id}/publish`, { method:'PATCH', body:{ isPublished } }); renderExams(document.getElementById('adminMain')); }
+  catch(err){ alert(err.message); }
+}
+async function deleteExam(id){
+  try{ await api(`/exams/${id}`, { method:'DELETE' }); renderExams(document.getElementById('adminMain')); }
+  catch(err){ alert(err.message); }
+}
+
+/* =====================================================================
+   RESULTS
+   ===================================================================== */
+async function renderResults(main, examId, classId){
+  const [exams, classes, subjects] = await Promise.all([api('/exams'), api('/classes'), api('/subjects')]);
+  if(!exams.length){
+    main.innerHTML = `<h2>Results</h2><div class="placeholder-box"><div class="tagline">No exams yet</div>Create an exam under Exams first.</div>`;
+    return;
+  }
+  const exam = exams.find(e=>e.id===examId) || exams[0];
+  const cls = classes.find(c=>c.id===classId) || classes[0];
+  const examOpts = exams.map(e=>`<option value="${e.id}" ${e.id===exam.id?'selected':''}>${escapeHtml(e.name)}${e.is_published?' (published)':''}</option>`).join('');
+  const classOpts = classes.map(c=>`<option value="${c.id}" ${cls && c.id===cls.id?'selected':''}>${escapeHtml(c.name)} — ${sectionLabel(c.section)}</option>`).join('');
+
+  let tableHtml = '<div class="empty">No classes yet.</div>';
+  if(cls){
+    const results = await api(`/results?examId=${exam.id}&classId=${cls.id}`);
+    const classSubjects = subjects.filter(s=>!s.section || s.section===cls.section);
+    const subjectCols = classSubjects.map(s=>`<th>${escapeHtml(s.name)}</th>`).join('');
+    const bodyRows = results.map(r=>{
+      const cells = classSubjects.map(sub=>{
+        const entry = r.subjects.find(x=>x.subject.id===sub.id);
+        const m = entry ? entry.mark : null;
+        return `<td class="pts">${m ? `${m.percent!=null?m.percent+'% · ':''}${m.sublevel} <span class="level-chip ${levelOf(m.sublevel)}">${m.points}</span>` : '—'}</td>`;
+      }).join('');
+      return `<tr>
+        <td class="rank">${r.position ? '#'+r.position : '—'}</td>
+        <td>${escapeHtml(r.student.full_name)}</td>
+        ${cells}
+        <td class="pts">${r.meanPoints!=null ? r.meanPoints.toFixed(1) : '—'}</td>
+        <td>${r.meanLevel ? `<span class="level-chip ${r.meanLevel}">${r.meanLevel}</span>` : '—'}</td>
+      </tr>`;
+    }).join('');
+    const graded = results.filter(r=>r.subjectsGraded>0);
+    const classMean = graded.length ? graded.reduce((a,r)=>a+r.meanPoints,0)/graded.length : null;
+    tableHtml = `
+      <div class="badge-row">
+        <div class="stat"><span class="num">${graded.length}</span><span class="lbl">Students with marks</span></div>
+        <div class="stat"><span class="num">${classMean!=null?classMean.toFixed(1):'—'}</span><span class="lbl">Class mean points</span></div>
+      </div>
+      <div class="mark-grid-wrap">
+        <table class="mark-grid">
+          <thead><tr><th>Pos</th><th>Student</th>${subjectCols}<th>Mean pts</th><th>Mean grade</th></tr></thead>
+          <tbody>${bodyRows || `<tr><td colspan="${4+classSubjects.length}" class="empty">No students in this class yet.</td></tr>`}</tbody>
+        </table>
+      </div>
+      <p class="hint" style="margin-top:14px;">Mean grade and class position are internal MOHI tracking figures — CBC/KNEC reporting itself has no aggregate score or ranking.</p>
+    `;
+  }
+  main.innerHTML = `
+    <h2>Results</h2>
+    <p class="lede">Computed live from the marks table — updates as teachers enter marks.</p>
+    <div class="select-row">
+      <div class="field"><label for="resultsExamSel">Exam</label><select id="resultsExamSel">${examOpts}</select></div>
+      <div class="field"><label for="resultsClassSel">Class</label><select id="resultsClassSel">${classOpts || '<option>No classes yet</option>'}</select></div>
+    </div>
+    ${tableHtml}
+    <div class="panel">
+      <h3>Bulk upload — whole school, one exam</h3>
+      <p class="sub">For when marks are consolidated on one master sheet instead of entered class-by-class. Columns: <strong>School ID, Subject, Score</strong> (score can be a CBC sub-level or a 0–100 percentage). Applies to <strong>${escapeHtml(exam.name)}</strong> — switch the exam above first if that's wrong. <a href="#" onclick="downloadCSV('mohi-whole-school-marks-template.csv', [['School ID','Subject','Score']]); return false;">Download CSV template</a></p>
+      <div class="row-form">
+        <div class="field"><label for="bulkMarksCsvFile">CSV file</label><input type="file" id="bulkMarksCsvFile" accept=".csv,text/csv"></div>
+        <button class="btn small" onclick="importBulkMarksCsv('${exam.id}')">Upload &amp; apply marks</button>
+      </div>
+      <div id="bulkMarksResult"></div>
+    </div>
+  `;
+  document.getElementById('resultsExamSel').addEventListener('change', e=>renderResults(main, e.target.value, document.getElementById('resultsClassSel').value));
+  if(document.getElementById('resultsClassSel')){
+    document.getElementById('resultsClassSel').addEventListener('change', e=>renderResults(main, document.getElementById('resultsExamSel').value, e.target.value));
+  }
+}
+async function importBulkMarksCsv(examId){
+  const fileInput = document.getElementById('bulkMarksCsvFile');
+  const resultBox = document.getElementById('bulkMarksResult');
+  try{
+    const csv = await readFileAsText(fileInput);
+    const result = await api('/marks/bulk', { method:'POST', body:{ examId, csv } });
+    resultBox.innerHTML = csvResultBox(result.added, result.skipped, 'mark');
+    fileInput.value = '';
+  }catch(err){
+    resultBox.innerHTML = `<div class="error-msg" style="margin-top:12px;">${escapeHtml(err.message)}</div>`;
+  }
+}
+
+/* =====================================================================
+   NOTIFICATIONS (edit-request approvals)
+   ===================================================================== */
+async function renderNotifications(main){
+  const [pending, resolved, pwPending] = await Promise.all([
+    api('/edit-requests?status=pending'),
+    api('/edit-requests'),
+    api('/password-reset-requests?status=pending').catch(()=>[]),
+  ]);
+  const pwRows = pwPending.map(r=>`
+    <tr>
+      <td>${escapeHtml(r.role)}</td>
+      <td>${escapeHtml(r.identifier)}</td>
+      <td>${escapeHtml(r.note || '—')}</td>
+      <td>${new Date(r.requested_at).toLocaleString()}</td>
+      <td><button class="btn small gold" onclick="resolvePasswordReset('${r.id}')">Mark resolved</button></td>
+    </tr>`).join('');
+  const pendingRows = pending.map(r=>`
+    <tr>
+      <td>${escapeHtml(r.label)}</td>
+      <td class="pts">${escapeHtml(r.old_value)}</td>
+      <td class="pts">${escapeHtml(r.new_value)}</td>
+      <td>${new Date(r.requested_at).toLocaleString()}</td>
+      <td>
+        <button class="btn small gold" onclick="resolveEditRequest('${r.id}','approve')">Approve</button>
+        <button class="btn small ghost" onclick="resolveEditRequest('${r.id}','reject')">Reject</button>
+      </td>
+    </tr>`).join('');
+  const history = resolved.filter(r=>r.status!=='PENDING').slice(0,15).map(r=>`
+    <tr>
+      <td>${escapeHtml(r.label)}</td>
+      <td class="pts">${escapeHtml(r.old_value)} → ${escapeHtml(r.new_value)}</td>
+      <td><span class="status-pill ${r.status==='APPROVED'?'published':'draft'}">${r.status}</span></td>
+      <td>${r.resolved_at ? new Date(r.resolved_at).toLocaleString() : '—'}</td>
+    </tr>`).join('');
+  main.innerHTML = `
+    <h2>Notifications</h2>
+    <p class="lede">Changes to a student's name/School ID, and marks edited after an exam is published, wait here for approval.</p>
+    <div class="panel">
+      <h3>Pending (${pending.length})</h3>
+      ${pending.length ? `<table><thead><tr><th>What</th><th>From</th><th>To</th><th>Requested</th><th></th></tr></thead><tbody>${pendingRows}</tbody></table>` : '<div class="empty">Nothing waiting on approval right now.</div>'}
+    </div>
+    <div class="panel">
+      <h3>Recent history</h3>
+      ${history.length ? `<table><thead><tr><th>What</th><th>Change</th><th>Status</th><th>Resolved</th></tr></thead><tbody>${history}</tbody></table>` : '<div class="empty">Nothing resolved yet.</div>'}
+    </div>
+    <div class="panel">
+      <h3>Password reset requests (${pwPending.length})</h3>
+      ${pwPending.length ? `<table><thead><tr><th>Role</th><th>Email / School ID</th><th>Note</th><th>Requested</th><th></th></tr></thead><tbody>${pwRows}</tbody></table>` : '<div class="empty">No pending password reset requests.</div>'}
+    </div>
+  `;
+}
+async function resolveEditRequest(id, action){
+  try{
+    await api(`/edit-requests/${id}/${action}`, { method:'POST' });
+    renderNotifications(document.getElementById('adminMain'));
+    refreshPendingBadge();
+  }catch(err){ alert(err.message); }
+}
+async function resolvePasswordReset(id){
+  try{
+    await api(`/password-reset-requests/${id}/resolve`, { method:'POST' });
+    renderNotifications(document.getElementById('adminMain'));
+  }catch(err){ alert(err.message); }
+}
+</script>
+
+<script>
+/* =====================================================================
+   TEACHER SHELL — mark entry (percent + CBC sub-level, synced both ways)
+   and class-teacher's-comment panel. Editing a mark on a published exam
+   queues for approval — the backend enforces this; the UI just shows
+   "Queued for approval" instead of "Saved" when that happens.
+   ===================================================================== */
+async function enterTeacherShell(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('teacherShell').classList.add('visible');
+  applyBrandLogoEverywhere();
+  document.getElementById('teacherWelcome').textContent = `Welcome, ${currentTeacher.full_name}`;
+  document.getElementById('teacherClassInfo').textContent = 'Loading your classes…';
+  await renderTeacherMain();
+}
+
+async function renderTeacherMain(examId, classId, subjectId, summaryHtml){
+  const main = document.getElementById('teacherMain');
+  const [teachers, classes, subjects, exams] = await Promise.all([
+    api('/teachers'), api('/classes'), api('/subjects'), api('/exams'),
+  ]);
+  const me = teachers.find(t=>t.id===currentTeacher.id) || { class_ids:[], subject_ids:[] };
+  const myClassIds = me.class_ids || [];
+  const mySubjectIds = me.subject_ids || [];
+
+  if(!myClassIds.length || !mySubjectIds.length){
+    document.getElementById('teacherClassInfo').textContent = '';
+    main.innerHTML = `<div class="placeholder-box"><div class="tagline">No class or subject assigned yet</div>Ask your School Admin to assign you a class and subject under Teachers.</div>`;
+    return;
+  }
+  if(!exams.length){
+    main.innerHTML = `<div class="placeholder-box"><div class="tagline">No exam periods open yet</div>Your School Admin needs to create an exam period first.</div>`;
+    return;
+  }
+
+  const cls = classes.find(c=>c.id===classId && myClassIds.includes(c.id)) || classes.find(c=>myClassIds.includes(c.id));
+  const subject = subjects.find(s=>s.id===subjectId) || subjects.find(s=>mySubjectIds.includes(s.id));
+  const exam = exams.find(e=>e.id===examId) || exams[0];
+
+  document.getElementById('teacherClassInfo').textContent = `Teaching ${subject.name} for ${cls.name} · ${sectionLabel(cls.section)}`;
+
+  const examOpts = exams.map(e=>`<option value="${e.id}" ${e.id===exam.id?'selected':''}>${escapeHtml(e.name)}${e.is_published?' (published)':''}</option>`).join('');
+  const classOpts = myClassIds.map(id=>{
+    const c = classes.find(x=>x.id===id); if(!c) return '';
+    return `<option value="${id}" ${id===cls.id?'selected':''}>${escapeHtml(c.name)} — ${sectionLabel(c.section)}</option>`;
+  }).join('');
+  const subjOpts = mySubjectIds.map(id=>{
+    const s = subjects.find(x=>x.id===id); if(!s) return '';
+    return `<option value="${id}" ${id===subject.id?'selected':''}>${escapeHtml(s.name)}</option>`;
+  }).join('');
+
+  const grid = await api(`/marks?examId=${exam.id}&classId=${cls.id}&subjectId=${subject.id}`);
+  const gradedCount = grid.filter(g=>g.sublevel).length;
+
+  const rows = grid.map(g=>{
+    const opts = SUBLEVELS.map(sl=>`<option value="${sl}" ${g.sublevel===sl?'selected':''}>${SUBLEVEL_LABELS[sl]}</option>`).join('');
+    return `<tr id="row-${g.student_id}">
+      <td>${escapeHtml(g.full_name)}</td>
+      <td>
+        <input type="number" min="0" max="100" placeholder="%" class="pct-input" id="pct-${g.student_id}"
+          value="${g.percent!=null ? g.percent : ''}"
+          onchange="handlePercentChange('${exam.id}','${g.student_id}','${subject.id}', this.value)">
+      </td>
+      <td>
+        <select id="sel-${g.student_id}" onchange="handleMarkChange('${exam.id}','${g.student_id}','${subject.id}', this.value)">
+          <option value="">— Not graded —</option>
+          ${opts}
+        </select>
+      </td>
+      <td class="pts" id="pts-${g.student_id}">${g.points!=null ? g.points : '—'}</td>
+      <td><span class="save-flag" id="flag-${g.student_id}">Saved</span></td>
+    </tr>`;
+  }).join('');
+
+  main.innerHTML = `
+    <div class="select-row">
+      <div class="field"><label for="teacherExamSel">Exam</label><select id="teacherExamSel">${examOpts}</select></div>
+      ${myClassIds.length>1 ? `<div class="field"><label for="teacherClassSel">Class</label><select id="teacherClassSel">${classOpts}</select></div>` : ''}
+      ${mySubjectIds.length>1 ? `<div class="field"><label for="teacherSubjectSel">Subject</label><select id="teacherSubjectSel">${subjOpts}</select></div>` : ''}
+      <div style="flex:1"></div>
+      <div class="field" style="min-width:auto; text-align:right;"><label>&nbsp;</label><span class="tag">${escapeHtml(subject.name)} · ${escapeHtml(cls.name)}</span></div>
+    </div>
+    <div class="badge-row"><div class="stat"><span class="num">${gradedCount}/${grid.length}</span><span class="lbl">Students graded</span></div></div>
+    <div class="panel">
+      <h3>Mark entry — ${escapeHtml(subject.name)}, ${escapeHtml(cls.name)}</h3>
+      <p class="sub">Enter a percentage or pick a CBC sub-level directly — they stay in sync. Saves automatically.</p>
+      ${grid.length ? `
+      <div class="mark-grid-wrap">
+        <table class="mark-grid">
+          <thead><tr><th>Student</th><th>%</th><th>Performance sub-level</th><th>Points</th><th></th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>` : `<div class="empty">No students in ${escapeHtml(cls.name)} yet.</div>`}
+      ${summaryHtml || ''}
+    </div>
+    ${grid.length ? `
+    <div class="panel">
+      <h3>Class teacher's comments — ${escapeHtml(cls.name)}, ${escapeHtml(exam.name)}</h3>
+      <p class="sub">A short overall remark for each student's report card this term. Saves when you click out of the box.</p>
+      <div class="mark-grid-wrap">
+        <table class="mark-grid">
+          <thead><tr><th style="width:160px;">Student</th><th>Comment</th><th></th></tr></thead>
+          <tbody id="remarksBody">${grid.map(g=>`<tr><td>${escapeHtml(g.full_name)}</td><td colspan="2" class="spinner-row" style="padding:8px;">…</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>` : ''}
+  `;
+  document.getElementById('teacherExamSel').addEventListener('change', e=>renderTeacherMain(e.target.value, cls.id, subject.id));
+  if(document.getElementById('teacherClassSel')) document.getElementById('teacherClassSel').addEventListener('change', e=>renderTeacherMain(exam.id, e.target.value, subject.id));
+  if(document.getElementById('teacherSubjectSel')) document.getElementById('teacherSubjectSel').addEventListener('change', e=>renderTeacherMain(exam.id, cls.id, e.target.value));
+
+  if(grid.length) loadRemarks(exam.id, cls.id, grid);
+}
+
+async function loadRemarks(examId, classId, grid){
+  const body = document.getElementById('remarksBody');
+  if(!body) return;
+  let existing = [];
+  try{ existing = await api(`/remarks?examId=${examId}&classId=${classId}`); }catch{ /* fall back to blank */ }
+  const byStudent = Object.fromEntries(existing.map(r=>[r.student_id, r.text]));
+  body.innerHTML = grid.map(g=>`
+    <tr>
+      <td>${escapeHtml(g.full_name)}</td>
+      <td><textarea rows="2" class="remark-box" placeholder="e.g. Shows great improvement this term." onblur="handleRemarkChange('${examId}','${g.student_id}', this.value)">${escapeHtml(byStudent[g.student_id]||'')}</textarea></td>
+      <td><span class="save-flag" id="rflag-${g.student_id}">Saved</span></td>
+    </tr>`).join('');
+}
+
+async function handleMarkChange(examId, studentId, subjectId, sublevel){
+  const flag = document.getElementById(`flag-${studentId}`);
+  const pctInput = document.getElementById(`pct-${studentId}`);
+  try{
+    let res;
+    if(!sublevel){
+      res = await api(`/marks?examId=${examId}&studentId=${studentId}&subjectId=${subjectId}`, { method:'DELETE' });
+      res = res || { queued:false };
+    } else {
+      res = await api('/marks', { method:'PUT', body:{ examId, studentId, subjectId, sublevel, percent: null } });
+    }
+    if(res.queued){
+      flag.textContent = 'Queued for approval'; flag.classList.add('show');
+      setTimeout(()=>{ flag.classList.remove('show'); flag.textContent='Saved'; }, 1800);
+    } else {
+      document.getElementById(`pts-${studentId}`).textContent = res.mark ? res.mark.points : '—';
+      if(pctInput) pctInput.value = '';
+      flag.classList.add('show'); setTimeout(()=>flag.classList.remove('show'), 1200);
+    }
+  }catch(err){ alert(err.message); }
+}
+async function handlePercentChange(examId, studentId, subjectId, pctRaw){
+  const flag = document.getElementById(`flag-${studentId}`);
+  const sel = document.getElementById(`sel-${studentId}`);
+  const percent = pctRaw === '' ? null : Number(pctRaw);
+  try{
+    const res = await api('/marks', { method:'PUT', body:{ examId, studentId, subjectId, sublevel: null, percent } });
+    if(res.queued){
+      flag.textContent = 'Queued for approval'; flag.classList.add('show');
+      setTimeout(()=>{ flag.classList.remove('show'); flag.textContent='Saved'; }, 1800);
+    } else {
+      document.getElementById(`pts-${studentId}`).textContent = res.mark ? res.mark.points : '—';
+      if(sel) sel.value = res.mark ? res.mark.sublevel : '';
+      flag.classList.add('show'); setTimeout(()=>flag.classList.remove('show'), 1200);
+    }
+  }catch(err){ alert(err.message); }
+}
+async function handleRemarkChange(examId, studentId, text){
+  const flag = document.getElementById(`rflag-${studentId}`);
+  try{
+    await api('/remarks', { method:'PUT', body:{ examId, studentId, text } });
+    if(flag){ flag.classList.add('show'); setTimeout(()=>flag.classList.remove('show'), 1200); }
+  }catch(err){ alert(err.message); }
+}
+</script>
+
+<script>
+/* =====================================================================
+   STUDENT / PARENT SHELL — report card, term-over-term trend, print-to-PDF.
+   ===================================================================== */
+async function enterStudentShell(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('studentShell').classList.add('visible');
+  applyBrandLogoEverywhere();
+  try{
+    const me = await api('/students/me');
+    currentStudent = { id: me.id, name: me.full_name, className: me.class_name, section: me.section };
+    document.getElementById('studentWelcome').textContent = `Welcome, ${me.full_name}`;
+    document.getElementById('studentClassInfo').textContent = `${me.class_name || 'Class not set'}${me.section ? ' · ' + sectionLabel(me.section) : ''} · School ID ${me.school_id_number}`;
+  }catch(err){
+    document.getElementById('studentClassInfo').textContent = '';
+  }
+  renderStudentMain();
+}
+
+function sparklineSvg(points){
+  if(points.length < 2) return `<p class="hint">Trend chart appears once results are published for two or more terms.</p>`;
+  const w = 480, h = 90, pad = 14;
+  const xs = points.map((_,i)=> pad + i * ((w - pad*2) / (points.length - 1)));
+  const ys = points.map(p => h - pad - ((p - 1) / 7) * (h - pad*2));
+  const path = xs.map((x,i)=>`${i===0?'M':'L'}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+  const dots = xs.map((x,i)=>`<circle cx="${x.toFixed(1)}" cy="${ys[i].toFixed(1)}" r="3.5" fill="var(--brand-blue)"/>`).join('');
+  return `<svg class="sparkline-wrap" viewBox="0 0 ${w} ${h}" width="100%" height="${h}" xmlns="http://www.w3.org/2000/svg">
+    <path d="${path}" fill="none" stroke="var(--ink-navy)" stroke-width="2"/>${dots}
+  </svg>`;
+}
+
+async function renderStudentMain(examId){
+  const main = document.getElementById('studentMain');
+  let exams;
+  try{ exams = await api('/exams'); }catch(err){ main.innerHTML = `<div class="placeholder-box"><div class="tagline">Couldn't load results</div>${escapeHtml(err.message)}</div>`; return; }
+  if(!exams.length){
+    main.innerHTML = `<div class="placeholder-box"><div class="tagline">No results published yet</div>Check back once your center's admin publishes a term's results.</div>`;
+    return;
+  }
+  const exam = exams.find(e=>e.id===examId) || exams[exams.length-1];
+  let report;
+  try{ report = await api(`/report-card/${currentStudent.id}?examId=${exam.id}`); }
+  catch(err){ main.innerHTML = `<div class="placeholder-box"><div class="tagline">No results published yet</div>Check back once your center's admin publishes a term's results.</div>`; return; }
+
+  const trend = await api(`/report-card/${currentStudent.id}/trend`);
+  const examOpts = exams.filter(e=>e.is_published).map(e=>`<option value="${e.id}" ${e.id===exam.id?'selected':''}>${escapeHtml(e.name)}</option>`).join('');
+
+  const subjectRows = report.subjects.map(({subject, mark})=>`
+    <tr>
+      <td>${escapeHtml(subject.name)}</td>
+      <td class="pts">${mark && mark.percent!=null ? mark.percent+'%' : '—'}</td>
+      <td class="pts">${mark ? mark.sublevel : '—'}</td>
+      <td class="pts">${mark ? mark.points : '—'}</td>
+      <td>${mark ? `<span class="level-chip ${levelOf(mark.sublevel)}">${levelOf(mark.sublevel)}</span>` : '—'}</td>
+    </tr>`).join('');
+
+  const trendRows = trend.map(t=>`
+    <tr>
+      <td>${escapeHtml(t.exam.name)}</td>
+      <td class="pts">${t.meanPoints.toFixed(1)}</td>
+      <td><span class="level-chip ${t.meanLevel}">${t.meanLevel}</span></td>
+      <td class="rank">${t.position ? '#'+t.position+' of '+t.outOf : '—'}</td>
+    </tr>`).join('');
+
+  const termDates = [exam.opens_on ? `Opens ${exam.opens_on}` : '', exam.closes_on ? `Closes ${exam.closes_on}` : ''].filter(Boolean).join(' · ');
+  const logoSrc = document.querySelector('.seal img') ? document.querySelector('.seal img').src : '';
+
+  main.innerHTML = `
+    <div class="select-row no-print">
+      <div class="field"><label for="studentExamSel">Term / exam</label><select id="studentExamSel">${examOpts}</select></div>
+      <div style="flex:1"></div>
+      <button class="btn gold" style="width:auto; padding:9px 18px;" onclick="window.print()">Download report card (PDF)</button>
+    </div>
+    <div class="report-card">
+      <div class="rc-watermark">MOHI</div>
+      <div class="rc-content">
+        <div class="rc-head">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <img src="${logoSrc}" alt="School logo" style="width:52px; height:52px; object-fit:contain; background:#fff; border:1px solid var(--line); border-radius:8px; padding:3px; flex-shrink:0;">
+            <div>
+              <div class="rc-org">Ndovoini Center — Missions of Hope International</div>
+              <h2>Report Card — ${escapeHtml(exam.name)}</h2>
+              ${termDates ? `<p class="hint" style="margin:2px 0 0;">${escapeHtml(termDates)}</p>` : ''}
+            </div>
+          </div>
+          <div class="rc-meta">
+            <div><strong>${escapeHtml(report.student.name)}</strong></div>
+            <div>School ID ${escapeHtml(currentStudent.id)}</div>
+            <div>${escapeHtml(report.student.className||'—')}${report.student.section ? ' · ' + sectionLabel(report.student.section) : ''}</div>
+          </div>
+        </div>
+        <div class="rc-stats">
+          <div class="stat"><span class="num">${report.meanPoints!=null?report.meanPoints.toFixed(1):'—'}</span><span class="lbl">Mean points</span></div>
+          <div class="stat"><span class="num">${report.meanLevel||'—'}</span><span class="lbl">Mean grade</span></div>
+          <div class="stat"><span class="num">${report.position?'#'+report.position:'—'}</span><span class="lbl">Class position (of ${report.outOf})</span></div>
+        </div>
+        <table>
+          <thead><tr><th>Subject</th><th>%</th><th>Sub-level</th><th>Points</th><th>Level</th></tr></thead>
+          <tbody>${subjectRows}</tbody>
+        </table>
+        ${report.remark ? `
+        <div style="margin-top:20px; padding:14px 16px; background:var(--paper); border-left:3px solid var(--brand-blue); border-radius:4px;">
+          <div style="font-size:0.72rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--text-soft); font-weight:700; margin-bottom:4px;">Class Teacher's Comment</div>
+          <div style="font-size:0.9rem; line-height:1.5;">${escapeHtml(report.remark)}</div>
+        </div>` : ''}
+        <p class="rc-footnote">Mean grade and class position are internal MOHI tracking figures for this center only — official CBC/KNEC reporting has no aggregate score or ranking.</p>
+        <h3 style="margin-top:28px;">Term-over-term trend</h3>
+        ${sparklineSvg(trend.map(t=>t.meanPoints))}
+        <table style="margin-top:10px;">
+          <thead><tr><th>Term / exam</th><th>Mean points</th><th>Mean grade</th><th>Position</th></tr></thead>
+          <tbody>${trendRows}</tbody>
+        </table>
+        <div class="rc-contacts">
+          <div class="rc-contact-card">
+            <div class="rc-contact-label">Class Teacher</div>
+            ${report.classTeacher ? `
+              <div class="rc-contact-name">${escapeHtml(report.classTeacher.full_name)}</div>
+              <div class="rc-contact-detail">${report.classTeacher.phone ? escapeHtml(report.classTeacher.phone) : 'No phone on file'}</div>
+              <button class="btn small ghost no-print" onclick="viewTeacherBioReadonly()">View contact &amp; bio</button>
+            ` : `<div class="rc-contact-detail">Not assigned yet.</div>`}
+          </div>
+          <div class="rc-contact-card">
+            <div class="rc-contact-label">Parent / Guardian on file</div>
+            <div class="rc-contact-name">${report.student.parentName ? escapeHtml(report.student.parentName) : '—'}</div>
+            <div class="rc-contact-detail">${[report.student.parentPhone, report.student.parentEmail].filter(Boolean).map(escapeHtml).join(' · ') || 'No contact on file'}</div>
+          </div>
+        </div>
+        <p class="rc-footnote" style="margin-top:24px; text-align:center; border-top:1px solid var(--line); padding-top:14px;">— End of report —</p>
+      </div>
+    </div>
+  `;
+  document.getElementById('studentExamSel').addEventListener('change', e=>renderStudentMain(e.target.value));
+  lastReportClassTeacher = report.classTeacher;
+}
+let lastReportClassTeacher = null;
+function viewTeacherBioReadonly(){
+  const t = lastReportClassTeacher;
+  if(!t) return;
+  openModal(`
+    <h3>${escapeHtml(t.full_name)}</h3>
+    <p class="sub" style="margin-bottom:14px;">${t.phone ? 'Phone: '+escapeHtml(t.phone) : 'No phone on file'}</p>
+    <p style="font-size:0.9rem; line-height:1.6;">${t.bio ? escapeHtml(t.bio) : 'No bio added yet.'}</p>
+    <button class="btn ghost" style="width:auto; padding:9px 18px; margin-top:10px;" onclick="closeModal()">Close</button>
+  `);
+}
+</script>
+
+<script>
+/* =====================================================================
+   LOGO + INIT
+   ===================================================================== */
+function applyBrandLogoEverywhere(){
+  const src = document.querySelector('.seal img') ? document.querySelector('.seal img').src : '';
+  if(!src) return;
+  ['sidebarBrandLogo','teacherHeaderLogo','studentHeaderLogo'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.src = src;
+  });
+}
+applyBrandLogoEverywhere();
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
